@@ -2,6 +2,8 @@ package be.vdab.repositories;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -24,48 +26,40 @@ class InMemoryFiliaalRepository implements FiliaalRepository {
 		filialen.put(3L, new Filiaal(3, "Gavdos", false, BigDecimal.valueOf(3000),
 			LocalDate.now(), new Adres("Koestraat", "44", 9700, "Oudenaarde")));
 	}
-	
-	
+		
 	@Override
 	public void create(Filiaal filiaal) {
-		// TODO Auto-generated method stub
-		
+		filiaal.setId(Collections.max(filialen.keySet()) + 1);
+		filialen.put(filiaal.getId(), filiaal);		
 	}
 
 	@Override
 	public Optional<Filiaal> read(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return Optional.ofNullable(filialen.get(id));
 	}
 
 	@Override
 	public void update(Filiaal filiaal) {
-		// TODO Auto-generated method stub
-		
+		filialen.put(filiaal.getId(), filiaal);
 	}
 
 	@Override
 	public void delete(long id) {
-		// TODO Auto-generated method stub
-		
+		filialen.remove(id);
 	}
 
 	@Override
 	public List<Filiaal> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return new ArrayList<>(filialen.values());
 	}
 
 	@Override
 	public long findAantalFilialen() {
-		// TODO Auto-generated method stub
-		return 0;
+		return filialen.size();
 	}
 
 	@Override
 	public long findAantalWerknemers(long id) {
-		// TODO Auto-generated method stub
-		return 0;
+		return id == 1L ? 7L : 0L;
 	}
-
 }
