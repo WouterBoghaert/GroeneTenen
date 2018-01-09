@@ -49,5 +49,4 @@ class DefaultFiliaalService implements FiliaalService {
 	public long findAantalFilialen() {
 		return filiaalRepository.findAantalFilialen();
 	}
-
 }
