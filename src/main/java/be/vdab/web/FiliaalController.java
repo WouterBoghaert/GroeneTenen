@@ -19,6 +19,7 @@ class FiliaalController {
 	private static final Logger LOGGER =
 		Logger.getLogger(FiliaalController.class.getName());
 	private final FiliaalService filiaalService;
+	private static final String FILIAAL_VIEW = "filialen/filiaal";
 	
 	FiliaalController(FiliaalService filiaalService) {
 		this.filiaalService = filiaalService;
@@ -38,6 +39,14 @@ class FiliaalController {
 	String create() {
 		LOGGER.info("filiaal record toevoegen aan database");
 		return REDIRECT_URL_NA_TOEVOEGEN;
+	}
+	
+	@GetMapping(params="id")
+	ModelAndView read(long id) {
+		ModelAndView modelAndView = new ModelAndView(FILIAAL_VIEW);
+		filiaalService.read(id)
+			.ifPresent(filiaal -> modelAndView.addObject(filiaal));
+		return modelAndView;
 	}
 
 }
