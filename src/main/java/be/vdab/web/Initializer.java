@@ -5,6 +5,7 @@ import javax.servlet.Filter;
 import org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+import be.vdab.aop.AOPConfig;
 import be.vdab.datasource.DataSourceConfig;
 import be.vdab.jms.JmsConfig;
 import be.vdab.mail.MailConfig;
@@ -25,7 +26,7 @@ public class Initializer
 	protected Class<?> [] getRootConfigClasses() {
 		return new Class<?>[] {DataSourceConfig.class, RepositoriesConfig.class, 
 			ServicesConfig.class, RestClientsConfig.class, MailConfig.class,
-			JmsConfig.class, SecurityConfig.class}; 
+			JmsConfig.class, SecurityConfig.class, AOPConfig.class}; 
 	}
 	
 	@Override
