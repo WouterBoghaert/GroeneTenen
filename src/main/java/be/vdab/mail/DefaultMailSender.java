@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import be.vdab.entities.Filiaal;
@@ -22,12 +23,13 @@ class DefaultMailSender implements MailSender {
 	private final String webmaster;
 	
 	DefaultMailSender(JavaMailSender sender,
-		@Value("${webmaster") String webmaster) {
+		@Value("${webmaster}") String webmaster) {
 		this.sender = sender;
 		this.webmaster = webmaster;
 	}
 	
 	@Override
+	@Async
 	public void nieuwFiliaalMail(Filiaal filiaal, String urlFiliaal) {
 		try {
 			MimeMessage message = sender.createMimeMessage();
